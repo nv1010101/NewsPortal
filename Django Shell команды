@@ -1,0 +1,43 @@
+1. Создать двух пользователей (с помощью метода User.objects.create_user('username')).
+user1 = User.objects.create_user('Петр Петрович')
+user2 = User.objects.create_user('Мария Ивановна')
+
+2. Создать два объекта модели Author, связанные с пользователями.
+author1 = Author.objects.create(user=user1)
+author2 = Author.objects.create(user=user2)
+
+3. Добавить 4 категории в модель Category.
+Category.objects.create(category_name = 'Разработка')
+Category.objects.create(category_name = 'Администрирование')
+Category.objects.create(category_name = 'Дизайн')
+Category.objects.create(category_name = 'Менеджмент')
+
+4. Добавить 2 статьи и 1 новость.
+Post.objects.create(post_author=author1, post_type='article', post_headline='Как ускорить Django', post_text='Завершение цикла статей про техническое... ')
+Post.objects.create(post_author=author2, post_type='article', post_headline='Простая очередь задач в Django, подключение Kandinsky 2.1', post_text='Большинство разработчиков рано или поздно сталкивается с необходимостью реализовать очереди выполнения, сложных вычислительных процессов...')
+Post.objects.create(post_author=author2, post_type='news', post_headline='Связь Django и PostgreSQL внутри Docker', post_text='Предполагаю, что если вы нашли эту статью, то уже знакомы с процессом...')
+
+
+
+
+
+
+from news.models import *
+user1 = User.objects.create_user('Петр Петрович')
+user2 = User.objects.create_user('Мария Ивановна')
+author1 = Author.objects.create(user=user1)
+author2 = Author.objects.create(user=user2)
+Category.objects.create(category_name = 'Разработка')
+Category.objects.create(category_name = 'Администрирование')
+Category.objects.create(category_name = 'Дизайн')
+Category.objects.create(category_name = 'Менеджмент')
+Post.objects.create(post_author=author1, post_type='article', post_headline='Как ускорить Django', post_text='Завершение цикла статей про техническое.. ')
+Post.objects.create(post_author=author2, post_type='article', post_headline='Простая очередь задач в Django, подключение Kandinsky 2.1', post_text='Большинство разработчиков рано или поздно сталкивается с необходимостью реализовать очереди выполнения, сложных вычислительных процессов...')
+Post.objects.create(post_author=author2, post_type='news', post_headline='Связь Django и PostgreSQL внутри Docker', post_text='Предполагаю, что если вы нашли эту статью, то уже знакомы с процессом')
+
+
+
+
+
+
+
