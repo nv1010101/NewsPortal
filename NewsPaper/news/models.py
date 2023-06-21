@@ -15,16 +15,25 @@ class Author(models.Model):
 #         суммарный рейтинг каждой статьи автора умножается на 3;
 # суммарный рейтинг всех комментариев автора;
 # суммарный рейтинг всех комментариев к статьям автора.
-
+    def __str__(self):
+        return self.user.username
 
 class Category(models.Model):
     category_name = models.CharField(max_length=100, unique=True)
+    subscribers = models.ManyToManyField(User, through='SubscribersCategory', related_name='categories' )
+
+    def __str__(self):
+        return self.name
+
+
+class SubscribersCategory(models.Model):
+    subscriber = models.ForeignKey(User, on_delete=models.CASCADE)
+    category = models.ForeignKey('Category', on_delete=models.CASCADE)
+
 
 
 class Post(models.Model):
     POST_TYPE = [("article", "статья"), ("news", "новость")]
-
-    post_author = models.ForeignKey(Author, on_delete=models.CASCADE)
     post_type = models.CharField(max_length=10, choices=POST_TYPE)
     post_pub_date = models.DateTimeField(auto_now_add=True)
     post = models.ManyToManyField(Category, through="PostCategory")
@@ -47,8 +56,8 @@ class Post(models.Model):
 
 
 class PostCategory(models.Model):
-    post = models.ForeignKey(Category, on_delete=models.CASCADE)
-    category = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey('Category', on_delete=models.CASCADE)
+    category = models.ForeignKey('Post', on_delete=models.CASCADE)
 
 
 class Comment(models.Model):

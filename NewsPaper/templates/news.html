@@ -1,0 +1,18 @@
+<!--  наследуемся от шаблона default.html, который мы создавали для flatpages -->
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+{% load custom_tags %}
+
+<!-- Название у нас будет Post -->
+{% block title %}
+News
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим саму статью, идентификатор которой был передан в url -->
+{% block content %}
+
+<h1>{{ news.title|censor }}</h1>
+<h5 align="right">{% current_time '%d %b %Y' %}</h5>
+<div align="justify">{{ news.text|censor }}</div>
+{% endblock content %}
